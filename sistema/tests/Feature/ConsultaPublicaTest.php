@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Enums\StatusCandidatura;
 use App\Enums\StatusDemanda;
+use App\Models\CategoriaDemanda;
 use App\Models\Candidatura;
 use App\Models\MembroEquipe;
 use App\Models\PapelEquipe;
@@ -125,5 +126,56 @@ class ConsultaPublicaTest extends TestCase
             ->assertOk()
             ->assertSee($estudante->nome)
             ->assertSee('Responsável Técnico');
+    }
+
+    public function test_pagina_publica_fala_primeiro_com_a_comunidade(): void
+    {
+        CategoriaDemanda::create(['nome' => 'Site e presença digital', 'ativo' => true]);
+        CategoriaDemanda::create(['nome' => 'Categoria inativa', 'ativo' => false]);
+        CategoriaDemanda::create(['nome' => 'Outros', 'ativo' => true]);
+
+        $this->get('/projetos')
+            ->assertOk()
+            ->assertSeeInOrder(['Sua comunidade ou instituição precisa de ajuda com tecnologia?', 'Como funciona', 'Escolhe o projeto de extensão', 'Projetos de extensão', 'É estudante da UFES? Veja as vagas abertas'])
+            ->assertSee(route('cadastro.demandante'), false)
+            ->assertSee('Site e presença digital')
+            ->assertDontSee('Categoria inativa')
+            ->assertDontSee('>Outros<', false);
+    }
+
+    public function test_visitante_escolhe_o_projeto_e_cai_no_login_com_o_projeto_guardado(): void
+    {
+        $destino = route('demandas.create', ['projeto' => $this->projeto->id]);
+
+        $this->get('/projetos')->assertSee($destino, false);
+
+        $this->get($destino)->assertRedirect('/login');
+        $this->get('/login')
+            ->assertSee('Entre com a conta da sua comunidade ou instituição para fazer o pedido.')
+            ->assertSee(route('cadastro.demandante'), false);
+
+        $demandante = Usuario::factory()->demandante()->create();
+        $this->post('/login', ['email' => $demandante->email, 'password' => 'password'])->assertRedirect($destino);
+    }
+
+    public function test_demandante_logado_pede_ajuda_no_projeto_escolhido(): void
+    {
+        $demandante = Usuario::factory()->demandante()->create();
+
+        $this->actingAs($demandante)->get('/projetos')
+            ->assertSee(route('demandas.create', ['projeto' => $this->projeto->id]), false)
+            ->assertSee('Quero pedir ajuda');
+
+        $formulario = $this->actingAs($demandante)->get(route('demandas.create', ['projeto' => $this->projeto->id]))->assertOk();
+        $this->assertMatchesRegularExpression('/value="'.$this->projeto->id.'" data-descricao="[^"]*" selected/', $formulario->getContent());
+    }
+
+    public function test_estudante_nao_ve_os_botoes_de_pedir_ajuda(): void
+    {
+        $this->actingAs(Usuario::factory()->estudante()->create())->get('/projetos')
+            ->assertOk()
+            ->assertDontSee('Quero pedir ajuda')
+            ->assertDontSee('Pedir ajuda neste projeto')
+            ->assertSee('Quero participar');
     }
 }

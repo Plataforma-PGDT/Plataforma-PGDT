@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\Modalidade;
+use App\Models\CategoriaDemanda;
 use App\Models\ProjetoBase;
 use App\Models\Subprojeto;
 use Illuminate\Database\Eloquent\Builder;
@@ -11,6 +12,7 @@ use Illuminate\View\View;
 
 /**
  * RF14: consulta pública, sem login, dos projetos de extensão e dos sub-projetos com vagas.
+ * A página fala primeiro com a comunidade (como pedir ajuda e em qual projeto) e depois com os estudantes (vagas).
  * Mostra só dados públicos: contatos do demandante, anexos e chat ficam de fora (LGPD).
  */
 class ProjetoPublicoController extends Controller
@@ -32,6 +34,8 @@ class ProjetoPublicoController extends Controller
             'projetos' => $projetos,
             'filtros' => $filtros,
             'modalidades' => Modalidade::cases(),
+            // Exemplos do que dá para pedir: as categorias ativas, menos a genérica "Outros".
+            'categorias' => CategoriaDemanda::query()->ativos()->where('nome', '!=', 'Outros')->get(),
         ]);
     }
 

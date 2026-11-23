@@ -13,6 +13,11 @@
 
                     @if (str_contains((string) session('url.intended'), '/oportunidades/'))
                         <div class="alert alert-info small">Entre com a sua conta de estudante para concluir a inscrição no sub-projeto.</div>
+                    @elseif (str_contains((string) session('url.intended'), '/demandas/create'))
+                        <div class="alert alert-info small">
+                            Entre com a conta da sua comunidade ou instituição para fazer o pedido.
+                            Ainda não tem cadastro? <a href="{{ route('cadastro.demandante') }}">Cadastre-se aqui</a>.
+                        </div>
                     @endif
 
                     <form method="POST" action="{{ route('login') }}" novalidate>

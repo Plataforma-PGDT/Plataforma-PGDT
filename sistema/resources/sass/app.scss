@@ -314,3 +314,39 @@
         }
     }
 }
+
+// Página pública dos projetos de extensão (RF14): primeiro a comunidade, depois as vagas.
+.pagina-publica {
+    .quadro-ajuda {
+        background: tint-color($primary, 92%);
+        border: 1px solid tint-color($primary, 75%);
+    }
+
+    .passo-numero {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 50%;
+        background: $primary;
+        color: $white;
+        font-weight: 700;
+    }
+
+    .passo-destaque {
+        border: 2px solid $primary;
+    }
+
+    .capa-cartao-projeto {
+        height: 7.5rem;
+    }
+
+    .chamada-pedido {
+        background: $primary;
+    }
+
+    .secao-vagas {
+        background: $gray-200;
+    }
+}

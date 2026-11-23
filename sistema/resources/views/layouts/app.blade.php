@@ -109,7 +109,7 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link @if (request()->routeIs('publico.*')) active @endif" href="{{ route('publico.index') }}">Projetos e vagas</a>
+                                <a class="nav-link @if (request()->routeIs('publico.*')) active @endif" href="{{ route('publico.index') }}">Projetos de extensão</a>
                             </li>
                         @endauth
                     </ul>
@@ -121,6 +121,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('register') }}">Criar conta</a>
+                            </li>
+                            <li class="nav-item ms-lg-2 my-2 my-lg-0">
+                                <a class="btn btn-light btn-sm fw-semibold text-primary" href="{{ route('cadastro.demandante') }}">Pedir ajuda</a>
                             </li>
                         @else
                             <li class="nav-item dropdown">
