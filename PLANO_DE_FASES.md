@@ -92,7 +92,7 @@ Para ligar o banco: abrir o **XAMPP Control Panel** (`C:\xampp\xampp-control.exe
 ### Tarefas
 - [x] Instalar PHP 8.2+, Composer, Node.js, XAMPP (Apache + MySQL) e Git.
 - [x] Criar o repositório no GitHub e definir o fluxo de branches.
-  - Repositório: https://github.com/PauloRizzi/Plataforma-de-Gestao-de-Demandas-Tecnologicas (remoto `origin`), com a raiz na pasta `PGDT/`.
+  - Repositório: https://github.com/Plataforma-PGDT/Plataforma-PGDT (remoto `origin`), com a raiz na pasta `PGDT/`.
   - Fluxo: `main` sempre funcionando; cada entrega em uma branch `feature/<fase>-<assunto>` (ex.: `feature/fase1-cadastros`), juntada na `main` quando o critério da etapa for atingido.
 - [x] Criar o projeto Laravel e configurar `.env` e o banco local.
   - Laravel 13.37 em `PGDT/sistema/`; o plano fica na raiz do repositório.
@@ -723,7 +723,7 @@ Detalhes de cada tabela, colunas e regras: [`docs/DER.md`](docs/DER.md).
 | 2026-10-18 | 0 | Ambiente pronto: extensões do PHP 8.3 ativadas, Composer 2.10.3 e XAMPP 8.2.12 (MariaDB 10.4.32) instalados, banco `pgdt` criado e conexão testada. |
 | 2026-10-18 | 0 | Ciclo de status ajustado: todas as mudanças passam a ser manuais (RF09 e RF13 atualizados). |
 | 2026-10-18 | 0 | As 9 propostas restantes foram aprovadas. Projeto Laravel 13 criado em `sistema/` com MySQL, pt_BR e `laravel/ui` + Bootstrap; página inicial funcionando em `php artisan serve`; repositório Git local iniciado com o primeiro commit. |
-| 2026-10-18 | 0 | Repositório no GitHub configurado (`origin` = github.com/PauloRizzi/Plataforma-de-Gestao-de-Demandas-Tecnologicas) e branch `main` enviada; fluxo `main` + `feature/*` definido. |
+| 2026-10-18 | 0 | Repositório no GitHub configurado (`origin` = github.com/Plataforma-PGDT/Plataforma-PGDT) e branch `main` enviada; fluxo `main` + `feature/*` definido. |
 | 2026-10-18 | 0 | DER completo revisado em `docs/DER.md` (23 tabelas no diagrama + `parametros`); plano ajustado: tabelas por perfil, `papeis_equipe`, `entrega_arquivos`. Diagrama Mermaid validado. Fase 0 aguarda a confirmação de 4 pontos do DER. |
 | 2026-10-18 | 0 | Autor aprovou os 4 pontos do DER. **Fase 0 concluída**: decisões registradas, ambiente pronto, `php artisan serve` conectado ao MySQL e repositório no GitHub atualizado. |
 | 2026-10-18 | 1 | Fase 1 iniciada na branch `feature/fase1-usuarios`. Traduções pt-BR do Laravel instaladas (`lucascudo/laravel-pt-br-localization`). |

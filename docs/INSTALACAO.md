@@ -41,7 +41,7 @@ C:\xampp\mysql\bin\mysql.exe -u root -e "CREATE DATABASE pgdt CHARACTER SET utf8
 ## 3. Clonar e instalar o projeto
 
 ```powershell
-git clone https://github.com/PauloRizzi/Plataforma-de-Gestao-de-Demandas-Tecnologicas.git PGDT
+git clone https://github.com/Plataforma-PGDT/Plataforma-PGDT.git PGDT
 cd PGDT\sistema
 composer install
 npm install
